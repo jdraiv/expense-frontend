@@ -1,7 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+/* Global CSS  */
+import './css/Vars.css';
+import 'bulma/css/bulma.css';
+import './css/Style.css';
+
 /* Importing apps */
+import RegisterApp from './apps/Register';
 import LoginApp from './apps/Login';
 import DashboardApp from './apps/Dashboard';
 
@@ -11,7 +17,8 @@ import * as serviceWorker from './serviceWorker';
 
 const appRouter = (
     <Router>
-        <div>
+        <div className="container">
+            <Route path="/register" component={RegisterApp} />
             <Route path="/login" component={LoginApp} />
             <Route path="/dashboard" component={DashboardApp} />
         </div>

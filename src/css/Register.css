@@ -1,0 +1,136 @@
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-color: var(--background-grey);
+}
+
+.register-app{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+
+.register-app .main-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: white;
+    border-radius: 5px;
+}
+
+
+
+.register-app .main-container .left-box{
+    color: white;
+    background-image: url("../characters.jpg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    width: 60%;
+    height: 100%;
+}
+
+
+#short-product-info{
+    display: block;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 1.3em;
+    font-family: var(--main-font);
+}
+
+
+.register-app .main-container .right-box{
+    width: 40%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.register-header{
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2.3em;
+    font-family: var(--main-font);
+    color: var(--text-black);
+}
+
+
+#register-app-inline-inputs-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.register-input{
+    width: 90% !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    font-size: 1em;
+    font-family: var(--main-font);
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+
+.register-label{
+    color: var(--text-black);
+    font-family: var(--main-font);
+    margin-left: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+
+#register-submit-btn{
+    width: 50% !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    background-color: var(--main-blue);
+    color: white;
+    border: none;
+    box-shadow: 0px 3px 0px var(--sec-blue);
+    font-family: var(--main-font);
+}
+
+
+#register-submit-btn:hover{
+    cursor: pointer;
+    background-color: var(--sec-blue);
+}
+
+
+@media (max-width: 1000px) {
+    #register-submit-btn{
+        width: 70% !important;
+    }
+}
+
+
+
+
+
