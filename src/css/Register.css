@@ -31,15 +31,15 @@ body{
 }
 
 
-
 .register-app .main-container .left-box{
     color: white;
     background-image: url("../characters.jpg");
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     width: 60%;
     height: 100%;
+    border-radius: 5px;
 }
 
 
