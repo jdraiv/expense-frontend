@@ -28,7 +28,7 @@ class RegisterApp extends Component {
     }
 
     submitData(event) {
-        const url = "https://cors-anywhere.herokuapp.com/https://expense-challenge.herokuapp.com/register";
+        const url = "http://localhost:5000/register";
         const postData = {
             'email': this.state.email,
             'password': this.state.password,
@@ -45,6 +45,7 @@ class RegisterApp extends Component {
         }).then((response) => {
             return response.json()
         }).then((jsonData) => {
+            console.log(jsonData);
             if (jsonData["status"] === "success") {
                 // Redirect to login
                 window.location.replace("/login");

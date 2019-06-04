@@ -1,0 +1,11 @@
+
+
+.dashboard-navbar{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    background-color: white;
+    box-shadow: 0px 2px 0px var(--background-grey-hover);
+}

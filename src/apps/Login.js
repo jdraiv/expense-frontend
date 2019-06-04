@@ -27,11 +27,12 @@ class LoginApp extends Component {
     }
 
     submitData(event) {
-        const url = "https://cors-anywhere.herokuapp.com/https://expense-challenge.herokuapp.com/auth";
+        const url = "localhost:5000/auth";
         const postData = {
             'email': this.state.email,
             'password': this.state.password
         }
+        console.log('hai')
 
         fetch(url, {
             method: 'POST',
@@ -43,9 +44,13 @@ class LoginApp extends Component {
             console.log(response);
             return response.json()
         }).then((jsonData) => {
+            console.log(jsonData);
+
+            /*
             if (jsonData["status"] === "success") {
                 window.location.replace('/dashboard');
             }
+            */
         }).catch((err) => {
             console.log(err);
         });
