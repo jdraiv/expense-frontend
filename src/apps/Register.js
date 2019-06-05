@@ -28,7 +28,7 @@ class RegisterApp extends Component {
     }
 
     submitData(event) {
-        const url = "http://localhost:5000/register";
+        const url = "https://expense-challenge.herokuapp.com/register";
         const postData = {
             'email': this.state.email,
             'password': this.state.password,

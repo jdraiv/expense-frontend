@@ -1,5 +1,4 @@
 
-
 .dashboard-navbar{
     display: flex;
     flex-direction: row;
@@ -8,4 +7,33 @@
     padding-bottom: 1.5%;
     background-color: white;
     box-shadow: 0px 2px 0px var(--background-grey-hover);
+    font-family: var(--main-font);
+}
+
+
+#navbar-analytics-btn{
+    margin-left: 5%;
+    border: none;
+    background-color: var(--main-blue);
+    color: white;
+    align-self: flex-end;
+    font-family: var(--main-font);
+}
+
+
+#navbar-name-btn{
+    margin-left: auto;
+    margin-right: 3%;
+    border: none;
+    color: var(--text-black);
+    align-self: flex-end;
+    font-family: var(--main-font);
+}
+
+
+#navbar-logout-btn{
+    margin-right: 5%;
+    background-color: var(--background-grey);
+    border: none;
+    font-family: var(--main-font);
 }

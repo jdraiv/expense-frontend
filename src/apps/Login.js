@@ -27,12 +27,11 @@ class LoginApp extends Component {
     }
 
     submitData(event) {
-        const url = "localhost:5000/auth";
+        const url = "https://expense-challenge.herokuapp.com/auth";
         const postData = {
             'email': this.state.email,
             'password': this.state.password
         }
-        console.log('hai')
 
         fetch(url, {
             method: 'POST',
@@ -41,16 +40,22 @@ class LoginApp extends Component {
                 'Content-Type': 'application/json'
             }
         }).then((response) => {
-            console.log(response);
             return response.json()
         }).then((jsonData) => {
-            console.log(jsonData);
-
-            /*
             if (jsonData["status"] === "success") {
+                localStorage.setItem("expense-firstName", jsonData["data"]["first_name"]);
+                localStorage.setItem("expense-lastName", jsonData["data"]["last_name"]);
+                localStorage.setItem("expense-email", jsonData["data"]["email"]);
+                localStorage.setItem("expense-budget", jsonData["data"]["budget"]);
+                localStorage.setItem("expense-jwt", jsonData["data"]["expense-jwt"]);
+                localStorage.setItem("expense-rtk", jsonData["data"]["expense-rtk"]);
+                
+                // Redirect the user to the dashboard
                 window.location.replace('/dashboard');
             }
-            */
+
+            console.log("Stored cookies in local storage");
+            console.log(localStorage.getItem("expense-jwt"));
         }).catch((err) => {
             console.log(err);
         });

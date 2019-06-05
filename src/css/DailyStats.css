@@ -1,0 +1,10 @@
+
+.daily-stats-container{
+    width: 55%;
+}
+
+
+.daily-stats-container .header{
+    font-size: 2em;
+    font-family: var(--main-font);
+}
