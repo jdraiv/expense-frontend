@@ -1,6 +1,9 @@
 
 .daily-stats-container{
+    display: flex;
     width: 55%;
+    height: 80vh;
+    background-color: white;
 }
 
 

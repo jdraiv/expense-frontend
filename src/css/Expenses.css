@@ -1,5 +1,22 @@
 
 .expenses-container{
-    width: 40%;
-    background-color: purple;
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    height: 80vh;
+    background-color: white;
 }
+
+
+.budget-container{
+    width: 100%;
+}
+
+
+#budget-value{
+    font-family: var(--main-font);
+    font-weight: bold;
+    padding: 2%;
+    font-size: 2em;
+}
+

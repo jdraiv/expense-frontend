@@ -89,9 +89,9 @@ class DashboardApp extends Component {
             <div className="dashboard-app">
                 <Navbar firstName={this.state.firstName} lastName={this.state.lastName} />
 
-                <div class="components-container">
+                <div className="components-container">
                     <DailyStats />
-                    <Expenses />
+                    <Expenses budget={this.state.budget} />
                 </div>
 
             </div>
