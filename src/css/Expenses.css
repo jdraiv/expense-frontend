@@ -59,18 +59,29 @@
 .budget-container{
     display: flex;
     width: 100%;
-    flex-direction: row;
     margin: 2%;
+    flex-wrap: nowrap;
+    font-size: 2em;
+    font-family: var(--main-font);
+    font-weight: bold;
+    color: var(--text-black);
 }
 
 
+.budget-value{
+    color: var(--text-black);
+    border: none;
+    outline: none;
+    font-size: 1em;
+}
+
+
+/*
 #budget-value{
     color: var(--text-black);
     font-family: var(--main-font);
     font-weight: bold;
     font-size: 2em;
-    flex-grow: 1;
-    border: none;
-    outline: none;
 }
 
+*/

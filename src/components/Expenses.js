@@ -73,8 +73,8 @@ class BudgetContainer extends Component {
     render() {
         return (
             <div className="budget-container">
-                <h3 id="budget-value">Budget $</h3>
-                <input onChange={this.inputChange} value={this.state.currentBudget} onKeyDown={this.handleKeyDown} id="budget-value" />
+                <h3 className="budget-header">Budget $</h3>
+                <input className="budget-value" onChange={this.inputChange} value={this.state.currentBudget} onKeyDown={this.handleKeyDown} />
             </div>
         )
     }
