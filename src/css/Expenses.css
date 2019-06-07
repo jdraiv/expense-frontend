@@ -1,10 +1,58 @@
 
-.expenses-container{
+.expenses-section{
     display: flex;
     flex-direction: column;
     width: 35%;
     height: 80vh;
     background-color: white;
+}
+
+
+.expenses-table-container{
+    width: 100%;
+    height: 90%;
+    overflow-y: auto;
+}
+
+
+.expenses-table{
+    text-align: center;
+    font-family: var(--main-font);
+    width: 100%;
+    font-size: 1em;
+    border: none !important;
+}
+
+
+#create-expense-submit-btn{
+    width: 200px;
+    margin: 2%;
+    background-color: var(--main-blue);
+    color: white;
+    border: none;
+    box-shadow: 0px 3px 0px var(--sec-blue);
+    font-family: var(--main-font);
+}
+
+
+.table-category-btn{
+    width: 90%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border-radius: 3px;
+    font-size: 1em;
+    color: white;
+    border: none;
+}
+
+
+.table-payee{
+    text-transform: capitalize;
+}
+
+
+.table-total{
+    color: #F55260;
 }
 
 
