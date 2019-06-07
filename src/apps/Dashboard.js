@@ -70,8 +70,8 @@ class DashboardApp extends Component {
             authorizationKeys: {"expense-jwt": newJWT, "expense-rtk": newRTK}
         });
 
-        this.setItem("expense-jwt", newJWT);
-        this.setItem("expense-rtk", newRTK);
+        localStorage.setItem("expense-jwt", newJWT);
+        localStorage.setItem("expense-rtk", newRTK);
         console.log("Tokens updated");
     }
 
@@ -87,7 +87,7 @@ class DashboardApp extends Component {
 
                 <div className="components-container">
                     <DailyStats />
-                    <Expenses budget={this.state.budget} authorizationKeys={this.state.authorizationKeys} updateTokensMethod={this.updateTokens} />
+                    <Expenses expenses={this.state.expenses} budget={this.state.budget} authorizationKeys={this.state.authorizationKeys} updateTokensMethod={this.updateTokens} />
                 </div>
 
             </div>
