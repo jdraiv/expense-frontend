@@ -7,6 +7,7 @@ import Expenses from '../components/Expenses';
 
 /* CSS Files */
 import '../css/Dashboard.css';
+import { throwStatement } from '@babel/types';
 
 
 class DashboardApp extends Component {
@@ -23,29 +24,19 @@ class DashboardApp extends Component {
         }
 
         // Methods
-        this.setDataFromLocalStorage = this.setDataFromLocalStorage.bind(this);
         this.fetchExpenses = this.fetchExpenses.bind(this);
         this.updateTokens = this.updateTokens.bind(this);
-    }
-
-    setDataFromLocalStorage() {
-        this.setState({
-            email: localStorage.getItem("expense-email"),
-            firstName: localStorage.getItem("expense-firstName"),
-            lastName: localStorage.getItem("expense-lastName"),
-            budget: localStorage.getItem("expense-budget"),
-            authorizationKeys: {"expense-jwt" : localStorage.getItem("expense-jwt"), "expense-rtk": localStorage.getItem("expense-rtk")}
-        });
     }
 
     fetchExpenses() {
         // Fetching data
         const url = "http://localhost:5000/get_expenses";
-
+        
         fetch(url, {
             method: 'POST',
             headers: {
-                'Authorization': this.state.authorizationKeys
+                'Content-Type': 'application/json',
+                'Authorization': JSON.stringify(this.state.authorizationKeys)
             }
         })
         .then((response) => {
@@ -53,7 +44,9 @@ class DashboardApp extends Component {
         })
         .then((jsonData) => {
             if (jsonData["status"] === "success") {
-                this.expenses = jsonData['data']['expenses'];
+                this.setState({
+                    expenses: jsonData['data']
+                });
                 console.log("Expenses have been set")
             } else if (jsonData["status"] === "refresh") {
                 this.updateTokens(jsonData["data"]["expense-jwt"], jsonData["data"]["expense-rtk"]);
@@ -62,6 +55,19 @@ class DashboardApp extends Component {
         .catch((err) => {
             console.log(err)
         })
+    }
+
+    setInitialData() {
+        // We set the data from localStorage
+        this.setState({
+            email: localStorage.getItem("expense-email"),
+            firstName: localStorage.getItem("expense-firstName"),
+            lastName: localStorage.getItem("expense-lastName"),
+            budget: localStorage.getItem("expense-budget"),
+            authorizationKeys: {"expense-jwt" : localStorage.getItem("expense-jwt"), "expense-rtk": localStorage.getItem("expense-rtk")}
+        }, () => {
+            this.fetchExpenses();
+        });
     }
 
     updateTokens(newJWT, newRTK) {
@@ -76,8 +82,7 @@ class DashboardApp extends Component {
     }
 
     componentDidMount() {
-        this.setDataFromLocalStorage();
-        this.fetchExpenses();
+        this.setInitialData();
     }
 
     render() {
