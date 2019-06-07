@@ -26,6 +26,14 @@ class DashboardApp extends Component {
         // Methods
         this.fetchExpenses = this.fetchExpenses.bind(this);
         this.updateTokens = this.updateTokens.bind(this);
+        this.getChildResponse = this.getChildResponse.bind(this);
+    }
+
+    // Tricky way to receive information from child elements
+    getChildResponse(stateElement, newValue) {
+        this.setState({
+            [stateElement]: newValue
+        });
     }
 
     fetchExpenses() {
@@ -92,7 +100,7 @@ class DashboardApp extends Component {
 
                 <div className="components-container">
                     <DailyStats />
-                    <Expenses expenses={this.state.expenses} budget={this.state.budget} authorizationKeys={this.state.authorizationKeys} updateTokensMethod={this.updateTokens} />
+                    <Expenses expenses={this.state.expenses} budget={this.state.budget} authorizationKeys={this.state.authorizationKeys} updateTokensMethod={this.updateTokens} passDataToParentMethod={this.getChildResponse}/>
                 </div>
 
             </div>

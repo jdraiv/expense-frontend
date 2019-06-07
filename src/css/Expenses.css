@@ -57,14 +57,20 @@
 
 
 .budget-container{
+    display: flex;
     width: 100%;
+    flex-direction: row;
+    margin: 2%;
 }
 
 
 #budget-value{
+    color: var(--text-black);
     font-family: var(--main-font);
     font-weight: bold;
-    padding: 2%;
     font-size: 2em;
+    flex-grow: 1;
+    border: none;
+    outline: none;
 }
 

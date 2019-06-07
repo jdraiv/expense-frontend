@@ -6,6 +6,81 @@ import '../css/Expenses.css';
 import CreateExpenseMenu from './CreateExpenseMenu';
 
 
+class BudgetContainer extends Component {
+    // Props = authorizationKeys, budget, passDataToParentMethod
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            currentBudget: 0
+        }
+
+        this.inputChange = this.inputChange.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
+        this.setBudget = this.setBudget.bind(this);
+    }
+
+    inputChange(event) {
+        let toSetValue = event.target.value;
+        if (event.target.value.length === 0) {
+            toSetValue = 0;
+        }
+
+        this.setState({
+            currentBudget: parseInt(toSetValue, 10)
+        });
+    }
+
+
+    handleKeyDown(event) {
+        if (event.key == 'Enter') {
+            this.setBudget();
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.state.currentBudget != nextProps) {
+            this.setState({
+                currentBudget: nextProps.budget
+            });
+        }
+    }
+
+    setBudget() {
+        const url = "http://localhost:5000/update_budget";
+        fetch(url, {
+            method: "PUT",
+            body: JSON.stringify({"budget": this.state.currentBudget}),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': JSON.stringify(this.props.authorizationKeys)
+            }
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((jsonData) => {
+            if (jsonData["status"] === "success") {
+                // Notify the parent of the new value
+                this.props.passDataToParentMethod("budget", this.state.currentBudget);
+
+                // Overwrite data in localStorage
+                localStorage.setItem("expense-budget", this.state.currentBudget);
+            }
+        });
+    }
+
+    render() {
+        return (
+            <div className="budget-container">
+                <h3 id="budget-value">Budget $</h3>
+                <input onChange={this.inputChange} value={this.state.currentBudget} onKeyDown={this.handleKeyDown} id="budget-value" />
+            </div>
+        )
+    }
+}
+
+
 class ExpenseTableItem extends Component {
     // Props = color, category, total, payee, date
     constructor(props) {
@@ -26,7 +101,7 @@ class ExpenseTableItem extends Component {
 
 
 class Expenses extends Component {
-    // Props = expenses, authorizationKeys, updateTokensMethod
+    // Props = expenses, authorizationKeys, updateTokensMethod, passDataToParentMethod
     constructor(props) {
         super(props);
 
@@ -62,10 +137,7 @@ class Expenses extends Component {
         else {
             return (
                 <div className="expenses-section">
-                    <div className="budget-container">
-                        <h2 id="budget-value">Budget: ${this.props.budget}</h2>
-                    </div>
-
+                    <BudgetContainer budget={this.props.budget} authorizationKeys={this.props.authorizationKeys} passDataToParentMethod={this.props.passDataToParentMethod} />
                     <div className="expenses-table-container">
                         <table className="table expenses-table">
                             <tr className="tbody">
