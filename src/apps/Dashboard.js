@@ -150,7 +150,7 @@ class DashboardApp extends Component {
     render() {
         return (
             <div className="dashboard-app">
-                <Navbar firstName={this.state.firstName} lastName={this.state.lastName} />
+                <Navbar signoutMethod={this.logoutUser} firstName={this.state.firstName} lastName={this.state.lastName} />
 
                 <div className="components-container">
                     <DailyStats />

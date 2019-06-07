@@ -1,20 +1,24 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Bulma from 'bulma/css/bulma.min.css';
 
-import '../css/Navbar.css'
+import '../css/Navbar.css';
 
 
-function Navbar(props) {
-    return (
-        <nav className="dashboard-navbar">
-            <div className="navbar-menu">
-                <a id="navbar-analytics-btn" class="button">Analytics</a>
+class Navbar extends Component {
+    // signoutMethod
+    constructor(props) {
+        super(props);
+    }
 
-                <button id="navbar-name-btn" className="button">{props.firstName} {props.lastName}</button>
-                <button id="navbar-logout-btn" className="button">Sign Out</button>
-            </div>
-        </nav>
-    )
+    render() {
+        return (
+            <nav className="dashboard-navbar">
+                <button id="navbar-name-btn" className="button">{this.props.firstName} {this.props.lastName}</button>
+                <button onClick={this.props.signoutMethod} id="navbar-logout-btn" className="button">Sign Out</button>
+            </nav>
+        )
+    }
 }
+
 
 export default Navbar;
