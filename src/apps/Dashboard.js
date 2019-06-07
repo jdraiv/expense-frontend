@@ -30,10 +30,39 @@ class DashboardApp extends Component {
     }
 
     // Tricky way to receive information from child elements
-    getChildResponse(stateElement, newValue) {
-        this.setState({
-            [stateElement]: newValue
-        });
+    getChildResponse(stateElement, newValue, eventType) {
+        if (eventType === "addBudget") {
+            this.setState({
+                [stateElement]: newValue
+            });
+        }
+        else if (eventType === "subBudget") {
+            let url = "http://localhost:5000/update_budget";
+
+            fetch(url, {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': JSON.stringify(this.state.authorizationKeys)
+                },
+                body: JSON.stringify({"budget": this.state.budget - newValue})
+            })
+            .then((response) => {
+                return response.json()
+            }).then((jsonData) => {
+                if (jsonData["status"] === "success") {
+                    this.setState({
+                        budget: this.state.budget - newValue
+                    });
+                    localStorage.setItem("budget", this.state.budget - newValue);
+                }
+            })
+        }
+        else if (eventType === "addExpense") {
+            this.setState(prevState => ({
+                expenses: this.state.expenses.concat(newValue)
+            }))
+        }
     }
 
     fetchExpenses() {
@@ -101,7 +130,7 @@ class DashboardApp extends Component {
 
                 <div className="components-container">
                     <DailyStats />
-                    <Expenses expenses={this.state.expenses} budget={this.state.budget} authorizationKeys={this.state.authorizationKeys} updateTokensMethod={this.updateTokens} passDataToParentMethod={this.getChildResponse}/>
+                    <Expenses expenses={this.state.expenses} budget={this.state.budget} authorizationKeys={this.state.authorizationKeys} updateTokensMethod={this.updateTokens} passDataToParentMethod={this.getChildResponse} />
                 </div>
 
             </div>

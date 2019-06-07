@@ -6,7 +6,7 @@ import { EventEmitter } from 'events';
 
 
 class CreateExpenseMenu extends Component {
-    // authorizationKeys, updateTokensMethod, successFunction, closeMenuMethod
+    // authorizationKeys, updateTokensMethod, successFunction, closeMenuMethod, passDataToParentMethod
     constructor(props) {
         super(props);
         this.state = {
@@ -67,6 +67,17 @@ class CreateExpenseMenu extends Component {
         }).then((jsonData) => {
             if (jsonData["status"] === "success") {
                 this.props.successFunction();
+
+                // Send new budget to the parent
+                let newExpenseData = {
+                    "category": this.state.category,
+                    "color": this.state.color,
+                    "expenseDate": this.state.date,
+                    "total": this.state.total,
+                    "payee": this.state.payee
+                }
+                this.props.passDataToParentMethod("budget", parseInt(this.state.total, 10), "subBudget");
+                this.props.passDataToParentMethod("expenses", newExpenseData, "addExpense");
             }
             else if (jsonData["status"] === "refresh") {
                 this.props.updateTokensMethod(jsonData["data"]["expense-jwt"], jsonData["data"]["expense-rtk"]);

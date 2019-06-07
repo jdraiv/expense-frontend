@@ -62,7 +62,7 @@ class BudgetContainer extends Component {
         .then((jsonData) => {
             if (jsonData["status"] === "success") {
                 // Notify the parent of the new value
-                this.props.passDataToParentMethod("budget", this.state.currentBudget);
+                this.props.passDataToParentMethod("budget", this.state.currentBudget, "addBudget");
 
                 // Overwrite data in localStorage
                 localStorage.setItem("expense-budget", this.state.currentBudget);
@@ -101,7 +101,7 @@ class ExpenseTableItem extends Component {
 
 
 class Expenses extends Component {
-    // Props = expenses, authorizationKeys, updateTokensMethod, passDataToParentMethod
+    // Props = expenses, authorizationKeys, updateTokensMethod
     constructor(props) {
         super(props);
 
@@ -131,7 +131,7 @@ class Expenses extends Component {
         });
         if (this.state.creatingExpense) {
             return (
-                <CreateExpenseMenu authorizationKeys={this.props.authorizationKeys} updateTokensMethod={this.props.updateTokensMethod} successFunction={this.expenseSuccessfullyCreated} closeMenuMethod={this.showOrHideMenu} />
+                <CreateExpenseMenu authorizationKeys={this.props.authorizationKeys} updateTokensMethod={this.props.updateTokensMethod} successFunction={this.expenseSuccessfullyCreated} closeMenuMethod={this.showOrHideMenu} passDataToParentMethod={this.props.passDataToParentMethod} />
             )
         }
         else {
