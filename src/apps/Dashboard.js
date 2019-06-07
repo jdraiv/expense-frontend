@@ -27,6 +27,7 @@ class DashboardApp extends Component {
         this.fetchExpenses = this.fetchExpenses.bind(this);
         this.updateTokens = this.updateTokens.bind(this);
         this.getChildResponse = this.getChildResponse.bind(this);
+        this.logoutUser = this.logoutUser.bind(this);
     }
 
     // Tricky way to receive information from child elements
@@ -89,23 +90,46 @@ class DashboardApp extends Component {
                 this.updateTokens(jsonData["data"]["expense-jwt"], jsonData["data"]["expense-rtk"]);
                 this.fetchExpenses();
             }
+            else {
+                // If there has been an error, the user cannot access this page
+                localStorage.removeItem("expense-jwt");
+                localStorage.removeItem("expense-rtk");
+                localStorage.removeItem("expense-email");
+                localStorage.removeItem("expense-budget");
+            }
         })
         .catch((err) => {
             console.log(err)
         })
     }
 
+    logoutUser() {
+        localStorage.removeItem("expense-jwt");
+        localStorage.removeItem("expense-rtk");
+        localStorage.removeItem("expense-firstName");
+        localStorage.removeItem("expense-lastName");
+        localStorage.removeItem("expense-email");
+        localStorage.removeItem("expense-budget");
+
+        window.location.replace('/login');
+    }
+
     setInitialData() {
         // We set the data from localStorage
-        this.setState({
-            email: localStorage.getItem("expense-email"),
-            firstName: localStorage.getItem("expense-firstName"),
-            lastName: localStorage.getItem("expense-lastName"),
-            budget: localStorage.getItem("expense-budget"),
-            authorizationKeys: {"expense-jwt" : localStorage.getItem("expense-jwt"), "expense-rtk": localStorage.getItem("expense-rtk")}
-        }, () => {
-            this.fetchExpenses();
-        });
+        if (localStorage.getItem("expense-jwt").length === 0) {
+            this.logoutUser();
+        }
+        else {
+            this.setState({
+                email: localStorage.getItem("expense-email"),
+                firstName: localStorage.getItem("expense-firstName"),
+                lastName: localStorage.getItem("expense-lastName"),
+                budget: localStorage.getItem("expense-budget"),
+                authorizationKeys: {"expense-jwt" : localStorage.getItem("expense-jwt"), "expense-rtk": localStorage.getItem("expense-rtk")}
+            }, () => {
+                this.fetchExpenses();
+            });
+        }
     }
 
     updateTokens(newJWT, newRTK) {
