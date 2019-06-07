@@ -58,6 +58,7 @@ class DashboardApp extends Component {
                 console.log("Expenses have been set")
             } else if (jsonData["status"] === "refresh") {
                 this.updateTokens(jsonData["data"]["expense-jwt"], jsonData["data"]["expense-rtk"]);
+                this.fetchExpenses();
             }
         })
         .catch((err) => {
