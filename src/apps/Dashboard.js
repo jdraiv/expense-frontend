@@ -116,7 +116,7 @@ class DashboardApp extends Component {
 
     setInitialData() {
         // We set the data from localStorage
-        if (localStorage.getItem("expense-jwt").length === 0) {
+        if (localStorage.getItem("expense-jwt") === null) {
             this.logoutUser();
         }
         else {
