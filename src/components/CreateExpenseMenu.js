@@ -2,9 +2,11 @@
 import React, {Component} from 'react';
 
 import '../css/CreateExpenseMenu.css';
+import { EventEmitter } from 'events';
 
 
 class CreateExpenseMenu extends Component {
+    // authorizationKeys, updateTokensMethod, successFunction, closeMenuMethod
     constructor(props) {
         super(props);
         this.state = {
@@ -14,7 +16,7 @@ class CreateExpenseMenu extends Component {
                 {'name': 'food', 'color': '#F44E6A'},
                 {'name': 'health', 'color': '#FC8FB4'},
                 {'name': 'house', 'color': '#57D68A'},
-                {'name': 'going Out', 'color': '#B09EE5'}
+                {'name': 'going out', 'color': '#B09EE5'}
             ],
             category: "",
             color: "",
@@ -28,7 +30,7 @@ class CreateExpenseMenu extends Component {
         this.submitData = this.submitData.bind(this);
     }
 
-    selectCategory(categoryData) {
+    selectCategory(event, categoryData) {
         this.setState({
             category: categoryData['name'],
             color: categoryData['color']
@@ -43,34 +45,40 @@ class CreateExpenseMenu extends Component {
     }
 
     submitData() {
-        let authorizationData = {
-            "expense-jwt": localStorage.getItem("expense-jwt"), 
-            "expense-rtk": localStorage.getItem("expense-rtk")
+        let url = "http://localhost:5000/create_expense";
+        let postData = {
+            "category": this.state.category,
+            "color": this.state.color,
+            "date": this.state.date,
+            "total": parseInt(this.state.total, 10),
+            "payee": this.state.payee
         }
-        console.log(JSON.stringify(authorizationData));
 
-        fetch('https://expense-challenge.herokuapp.com/create_expense', {
+        // Send information to the API
+        fetch(url, {
             method: "POST",
+            body: JSON.stringify(postData),
             headers: {
-                'Authorization': JSON.stringify(authorizationData)
+                'Content-Type': 'application/json',
+                'Authorization': JSON.stringify(this.props.authorizationKeys)
             },
-            body: JSON.stringify({
-                "category": this.state.category,
-                "color": this.state.color,
-                "date": this.state.date,
-                "total": parseInt(this.state.total, 100),
-                "payee": this.state.payee
-            })
         }).then((response) => {
-            console.log(response);
-            //return response.json();
-        })
+            return response.json();
+        }).then((jsonData) => {
+            if (jsonData["status"] === "success") {
+                this.props.successFunction();
+            }
+            else if (jsonData["status"] === "refresh") {
+                this.props.updateTokensMethod(jsonData["data"]["expense-jwt"], jsonData["data"]["expense-rtk"]);
+                this.submitData();
+            }
+        });
     }
 
     render() {
         const categories = this.state.categories.map((category) => {
             let style = {"backgroundColor": category['color']};
-            return <button onClick={() => this.selectCategory(category)} className="button category-btn" id={category['name']} style={style}>{category['name']}</button>
+            return <button onClick={(event) => this.selectCategory(event, category)} className="button category-btn" id={category['name']} style={style}>{category['name']}</button>
         })
         return (
             <div className="modal is-active">
@@ -79,7 +87,7 @@ class CreateExpenseMenu extends Component {
                     <div className="create-expense-menu-container">
                         <h1 className="header">New Expense</h1>
                         
-                        <h3 className="create-expense-menu-label">Category</h3>
+                        <h3 id="category-header">Category: <span id="active-category">{this.state.category}</span></h3>
                         <div className="categories-container">
                             {categories}
                         </div>
@@ -96,6 +104,7 @@ class CreateExpenseMenu extends Component {
                         </div>
 
                         <button onClick={this.submitData} type="button" className="button is-medium submit-btn">Create Expense</button>
+                        <button onClick={this.props.closeMenuMethod} className="modal-close is-large" aria-label="close"></button>
                     </div>
                 </div>
             </div>

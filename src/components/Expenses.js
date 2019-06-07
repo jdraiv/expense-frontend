@@ -7,17 +7,34 @@ import CreateExpenseMenu from './CreateExpenseMenu';
 
 
 class Expenses extends Component {
+    // Props = authorizationKeys, updateTokensMethod
     constructor(props) {
         super(props);
 
         this.state = {
-            creatingExpense: true
+            creatingExpense: false
         }
+
+        this.expenseSuccessfullyCreated = this.expenseSuccessfullyCreated.bind(this);
+        this.showOrHideMenu = this.showOrHideMenu.bind(this);
     }
+
+    expenseSuccessfullyCreated() {
+        this.setState({
+            creatingExpense: false
+        });
+    }
+
+    showOrHideMenu() {
+        this.setState({
+            creatingExpense: !this.state.creatingExpense
+        });
+    }
+
     render() {
         if (this.state.creatingExpense) {
             return (
-                <CreateExpenseMenu />
+                <CreateExpenseMenu authorizationKeys={this.props.authorizationKeys} updateTokensMethod={this.props.updateTokensMethod} successFunction={this.expenseSuccessfullyCreated} closeMenuMethod={this.showOrHideMenu} />
             )
         }
         else {
@@ -37,6 +54,8 @@ class Expenses extends Component {
                             </tr>
                         </table>
                     </div>
+
+                    <div className="button" onClick={this.showOrHideMenu}>Create Expense</div>
                 </div>
             )
         }

@@ -18,7 +18,8 @@ class DashboardApp extends Component {
             budget: 0,
             firstName: "",
             lastName: "",
-            expenses: []
+            expenses: [],
+            authorizationKeys: {},
         }
 
         // Methods
@@ -27,31 +28,24 @@ class DashboardApp extends Component {
         this.updateTokens = this.updateTokens.bind(this);
     }
 
-
     setDataFromLocalStorage() {
         this.setState({
             email: localStorage.getItem("expense-email"),
             firstName: localStorage.getItem("expense-firstName"),
             lastName: localStorage.getItem("expense-lastName"),
-            budget: localStorage.getItem("expense-budget")
+            budget: localStorage.getItem("expense-budget"),
+            authorizationKeys: {"expense-jwt" : localStorage.getItem("expense-jwt"), "expense-rtk": localStorage.getItem("expense-rtk")}
         });
-
-        console.log(this.state.firstName)
     }
-
 
     fetchExpenses() {
         // Fetching data
-        const url = "https://expense-challenge.herokuapp.com/get_expenses";
-        let authorizationData = {
-            "expense-jwt": localStorage.getItem("expense-jwt"), 
-            "expense-rtk": localStorage.getItem("expense-rtk")
-        }
+        const url = "http://localhost:5000/get_expenses";
 
         fetch(url, {
             method: 'POST',
             headers: {
-                'Authorization': JSON.stringify(authorizationData)
+                'Authorization': this.state.authorizationKeys
             }
         })
         .then((response) => {
@@ -70,14 +64,16 @@ class DashboardApp extends Component {
         })
     }
 
-
     updateTokens(newJWT, newRTK) {
-        localStorage.setItem("expense-jwt", newJWT);
-        localStorage.setItem("expense-rtk", newRTK);
+        // Store the new tokens in state and localStorage
+        this.setState({
+            authorizationKeys: {"expense-jwt": newJWT, "expense-rtk": newRTK}
+        });
 
+        this.setItem("expense-jwt", newJWT);
+        this.setItem("expense-rtk", newRTK);
         console.log("Tokens updated");
     }
-
 
     componentDidMount() {
         this.setDataFromLocalStorage();
@@ -91,7 +87,7 @@ class DashboardApp extends Component {
 
                 <div className="components-container">
                     <DailyStats />
-                    <Expenses budget={this.state.budget} />
+                    <Expenses budget={this.state.budget} authorizationKeys={this.state.authorizationKeys} updateTokensMethod={this.updateTokens} />
                 </div>
 
             </div>
