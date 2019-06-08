@@ -27,7 +27,7 @@ class LoginApp extends Component {
     }
 
     submitData(event) {
-        const url = "http://localhost:5000/auth";
+        const url = "https://expense-challenge.herokuapp.com/auth";
         const postData = {
             'email': this.state.email,
             'password': this.state.password

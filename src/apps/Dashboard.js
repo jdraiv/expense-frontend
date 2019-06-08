@@ -38,7 +38,7 @@ class DashboardApp extends Component {
             });
         }
         else if (eventType === "subBudget") {
-            let url = "http://localhost:5000/update_budget";
+            let url = "https://expense-challenge.herokuapp.com/update_budget";
 
             fetch(url, {
                 method: "PUT",
@@ -68,7 +68,7 @@ class DashboardApp extends Component {
 
     fetchExpenses() {
         // Fetching data
-        const url = "http://localhost:5000/get_expenses";
+        const url = "https://expense-challenge.herokuapp.com/get_expenses";
         
         fetch(url, {
             method: 'POST',

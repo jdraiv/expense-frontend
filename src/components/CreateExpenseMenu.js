@@ -45,7 +45,7 @@ class CreateExpenseMenu extends Component {
     }
 
     submitData() {
-        let url = "http://localhost:5000/create_expense";
+        let url = "https://expense-challenge.herokuapp.com/create_expense";
         let postData = {
             "category": this.state.category,
             "color": this.state.color,

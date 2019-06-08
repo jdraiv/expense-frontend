@@ -47,7 +47,7 @@ class BudgetContainer extends Component {
     }
 
     setBudget() {
-        const url = "http://localhost:5000/update_budget";
+        const url = "https://expense-challenge.herokuapp.com/update_budget";
         fetch(url, {
             method: "PUT",
             body: JSON.stringify({"budget": this.state.currentBudget}),
