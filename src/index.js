@@ -17,6 +17,7 @@ import * as serviceWorker from './serviceWorker';
 
 const appRouter = (
     <Router>
+        <Route exact path="/" component={LoginApp} />
         <Route path="/register" component={RegisterApp} />
         <Route path="/login" component={LoginApp} />
         <Route path="/dashboard" component={DashboardApp} />
