@@ -9,6 +9,7 @@
     "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "path": "^0.12.7",
     "pg": "^7.11.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -19,7 +20,7 @@
     "sequelize": "^5.8.7"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
