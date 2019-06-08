@@ -7,6 +7,7 @@ import 'bulma/css/bulma.css';
 import './css/Style.css';
 
 /* Importing apps */
+import HomepageApp from './apps/Homepage';
 import RegisterApp from './apps/Register';
 import LoginApp from './apps/Login';
 import DashboardApp from './apps/Dashboard';
@@ -17,7 +18,7 @@ import * as serviceWorker from './serviceWorker';
 
 const appRouter = (
     <Router>
-        <Route exact path="/" component={LoginApp} />
+        <Route exact path="/" component={HomepageApp} />
         <Route path="/register" component={RegisterApp} />
         <Route path="/login" component={LoginApp} />
         <Route path="/dashboard" component={DashboardApp} />
