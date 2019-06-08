@@ -1,0 +1,40 @@
+
+
+.homepage-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+    background-image: url("../characters.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.auth-btns-container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: row;
+    width: 100%;
+    height: 10%;
+}
+
+
+.auth-btns-container .button{
+    font-family: var(--main-font);
+    margin-right: 2%;
+    background-color: transparent;
+}
+
+
+#dashboard-login-btn{
+    border-color: transparent;
+}
+
+
+#dashboard-register-btn{
+    border-color: var(--text-black) !important;
+    border-width: 2px;
+}
