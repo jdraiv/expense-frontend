@@ -37,7 +37,7 @@ class DailyStats extends Component {
         let pieData = [];
         let totalExpenses = 0;
         
-        if (prevProps.expenses.length != this.props.expenses.length && this.props.expenses.length != 0) {
+        if (prevProps.expenses.length !== this.props.expenses.length && this.props.expenses.length !== 0) {
             for (let expense of this.props.expenses) {
                 let currentDate = this.getDate();
 

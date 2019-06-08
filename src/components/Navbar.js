@@ -5,11 +5,6 @@ import '../css/Navbar.css';
 
 
 class Navbar extends Component {
-    // signoutMethod
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <nav className="dashboard-navbar">

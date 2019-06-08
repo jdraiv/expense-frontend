@@ -11,7 +11,7 @@ import RegisterApp from './apps/Register';
 import LoginApp from './apps/Login';
 import DashboardApp from './apps/Dashboard';
 
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import { Route, BrowserRouter as Router } from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
 
 

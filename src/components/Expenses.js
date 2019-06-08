@@ -33,13 +33,13 @@ class BudgetContainer extends Component {
 
 
     handleKeyDown(event) {
-        if (event.key == 'Enter') {
+        if (event.key === 'Enter') {
             this.setBudget();
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.state.currentBudget != nextProps) {
+        if (this.state.currentBudget !== nextProps) {
             this.setState({
                 currentBudget: nextProps.budget
             });
@@ -83,9 +83,6 @@ class BudgetContainer extends Component {
 
 class ExpenseTableItem extends Component {
     // Props = color, category, total, payee, date
-    constructor(props) {
-        super(props);
-    }
     render() {
         let color = {"backgroundColor": this.props.color};
         return (
@@ -127,7 +124,7 @@ class Expenses extends Component {
 
     render() {
         let expenses = this.props.expenses.map((expense, key) => {
-            return <ExpenseTableItem color={expense['color']} category={expense['category']} payee={expense['payee']} total={expense['total']} date={expense['expenseDate']} />
+            return <ExpenseTableItem key={expense['id']} color={expense['color']} category={expense['category']} payee={expense['payee']} total={expense['total']} date={expense['expenseDate']} />
         });
         if (this.state.creatingExpense) {
             return (
