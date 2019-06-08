@@ -5,9 +5,9 @@ import Navbar from '../components/Navbar';
 import DailyStats from '../components/DailyStats';
 import Expenses from '../components/Expenses';
 
+
 /* CSS Files */
 import '../css/Dashboard.css';
-import { throwStatement } from '@babel/types';
 
 
 class DashboardApp extends Component {
@@ -153,7 +153,7 @@ class DashboardApp extends Component {
                 <Navbar signoutMethod={this.logoutUser} firstName={this.state.firstName} lastName={this.state.lastName} />
 
                 <div className="components-container">
-                    <DailyStats />
+                    <DailyStats expenses={this.state.expenses} />
                     <Expenses expenses={this.state.expenses} budget={this.state.budget} authorizationKeys={this.state.authorizationKeys} updateTokensMethod={this.updateTokens} passDataToParentMethod={this.getChildResponse} />
                 </div>
 

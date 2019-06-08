@@ -1,13 +1,59 @@
 
 .daily-stats-container{
     display: flex;
-    width: 55%;
+    width: 45%;
     height: 80vh;
+    flex-direction: column;
     background-color: white;
 }
 
 
+.pie-chart{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+
 .daily-stats-container .header{
+    padding-top: 2%;
+    text-align: center;
     font-size: 2em;
     font-family: var(--main-font);
+    color: var(--text-black);
 }
+
+
+.pie-labels-container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.pie-label-btn{
+    margin: 1%;
+    padding-left: 2%;
+    padding-right: 2%;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    outline: none;
+}
+
+
+.pie-chart-container{
+    margin-top: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+
+.pie-chart-container svg{
+    width: 50%;
+    height: 50%;
+}
+

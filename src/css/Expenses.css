@@ -2,7 +2,7 @@
 .expenses-section{
     display: flex;
     flex-direction: column;
-    width: 35%;
+    width: 45%;
     height: 80vh;
     background-color: white;
 }
@@ -75,13 +75,3 @@
     font-size: 1em;
 }
 
-
-/*
-#budget-value{
-    color: var(--text-black);
-    font-family: var(--main-font);
-    font-weight: bold;
-    font-size: 2em;
-}
-
-*/
