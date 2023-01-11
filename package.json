@@ -8,7 +8,7 @@
     "bulma": "^0.7.5",
     "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "path": "^0.12.7",
     "pg": "^7.11.0",
     "react": "^16.8.6",
